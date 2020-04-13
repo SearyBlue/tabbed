@@ -129,6 +129,7 @@ static void setup(void);
 static void sigchld(int unused);
 static void showbar(const Arg *arg);
 static void spawn(const Arg *arg);
+static void spawn_2(const Arg *arg);
 static int textnw(const char *text, unsigned int len);
 static void toggle(const Arg *arg);
 static void unmanage(int c);
@@ -1146,6 +1147,20 @@ spawn(const Arg *arg)
 		}
 		perror(" failed");
 		exit(0);
+	}
+}
+
+void
+spawn_2(const Arg *arg)
+{
+	if (fork() == 0) {
+		if (dpy)
+			close(ConnectionNumber(dpy));
+		setsid();
+		execvp(((char **)arg->v)[0], (char **)arg->v);
+		fprintf(stderr, "dwm: execvp %s", ((char **)arg->v)[0]);
+		perror(" failed");
+		exit(EXIT_SUCCESS);
 	}
 }
 
