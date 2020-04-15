@@ -33,8 +33,14 @@ static Bool npisrelative  = False;
         } \
 }
 
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define MODKEY ControlMask
+#define SETPROPNEW() { \
+        .v = (char *[]){ "/bin/sh", "-c", \
+        "xprop -id \"$0\" WM_NAME | cut -d '\"' -f2 | xargs dirname | xargs /usr/bin/find | dmenu -l 30 | xargs -r zathura -e \"$0\"", \
+        winid, NULL \
+        } \
+}
+
+#define MODKEY Mod1Mask
 static const char *opencmd[]  = { "find ~ -type f -iname \"*.pdf\" -o -iname \"*.djvu\" 2>/dev/null | dmenu -l 30 | xargs -r -d '\n' zathura_tabbed", NULL };
 static Key keys[] = {
 	/* modifier             key        function     argument */
@@ -43,6 +49,7 @@ static Key keys[] = {
 	{ MODKEY,     XK_h,    rotate,      { .i = -1 } },
 	{ MODKEY,     XK_Left,    rotate,      { .i = -1 } },
 	{ MODKEY,     XK_d,      spawn,       SETPROP("_TABBED_SELECT_TAB") },
+	{ MODKEY,     XK_o,      spawn,       SETPROPNEW() },
 	{ MODKEY,     XK_1,      move,        { .i = 0 } },
 	{ MODKEY,     XK_2,      move,        { .i = 1 } },
 	{ MODKEY,     XK_3,      move,        { .i = 2 } },
@@ -56,12 +63,12 @@ static Key keys[] = {
 	{ MODKEY,     XK_o,      spawn_2,       { .v = opencmd }},
 	{ MODKEY,     XK_q,      killclient,  { 0 } },
 //
-        { 0,          XK_Control_L, showbar,    { .i = 1 } },
+        { 0,          XK_Alt_L, showbar,    { .i = 1 } },
 //	{ ShiftMask,            XK_Control_L, showbar,    { .i = 1 } },
 };
 
 static Key keyreleases[] = {
 	/* modifier             key          function     argument */
-        { MODKEY,     XK_Control_L,  showbar,     { .i = 0 } },
-	{ MODKEY|ShiftMask,     XK_Control_L,  showbar,     { .i = 0 } },
+        { 0,               XK_Alt_L,  showbar,     { .i = 0 } },
+	{ MODKEY,     XK_Alt_L,  showbar,     { .i = 0 } },
 };
