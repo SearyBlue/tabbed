@@ -41,7 +41,6 @@ static Bool npisrelative  = False;
 }
 
 #define MODKEY Mod1Mask
-static const char *opencmd[]  = { "find ~ -type f -iname \"*.pdf\" -o -iname \"*.djvu\" 2>/dev/null | dmenu -l 30 | xargs -r -d '\n' zathura_tabbed", NULL };
 static Key keys[] = {
 	/* modifier             key        function     argument */
 	{ MODKEY,     XK_l,    rotate,      { .i = +1 } },
@@ -60,7 +59,6 @@ static Key keys[] = {
 	{ MODKEY,     XK_8,      move,        { .i = 7 } },
 	{ MODKEY,     XK_9,      move,        { .i = 8 } },
 	{ MODKEY,     XK_0,      move,        { .i = 9 } },
-	{ MODKEY,     XK_o,      spawn_2,       { .v = opencmd }},
 	{ MODKEY,     XK_q,      killclient,  { 0 } },
 //
         { 0,          XK_Alt_L, showbar,    { .i = 1 } },
