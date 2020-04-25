@@ -45,10 +45,6 @@ static Key keys[] = {
 	/* modifier             key        function     argument */
 	{ NULL,       XK_m,    rotate,      { .i = +1 } },
 	{ ShiftMask,  XK_m,    rotate,      { .i = -1 } },
-	/* { MODKEY,     XK_l,    rotate,      { .i = +1 } }, */
-	/* { MODKEY,     XK_Right,    rotate,      { .i = +1 } }, */
-	/* { MODKEY,     XK_h,    rotate,      { .i = -1 } }, */
-	/* { MODKEY,     XK_Left,    rotate,      { .i = -1 } }, */
 	{ MODKEY,       XK_p,      spawn,       SETPROP("_TABBED_SELECT_TAB") },
 	{ MODKEY,     XK_o,      spawn,       SETPROPNEW() },
 	{ MODKEY,     XK_1,      move,        { .i = 0 } },
