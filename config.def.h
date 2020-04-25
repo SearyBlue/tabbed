@@ -67,6 +67,6 @@ static Key keys[] = {
 
 static Key keyreleases[] = {
 	/* modifier             key          function     argument */
-        /* { 0,               XK_Alt_L,  showbar,     { .i = 0 } }, */
-	/* { MODKEY,     XK_Alt_L,  showbar,     { .i = 0 } }, */
+        { 0,               XK_Alt_L,  showbar,     { .i = 0 } },
+	{ MODKEY,     XK_Alt_L,  showbar,     { .i = 0 } },
 };
