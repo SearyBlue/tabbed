@@ -1,4 +1,4 @@
-pkgname=tabbed
+pkgname=tabbed-kirito
 gitname=tabbed
 pkgver=0.6
 pkgrel=1
@@ -12,6 +12,7 @@ conflicts=('tabbed' 'tabbed-git')
 build() 
 {
 	cd "$srcdir/$gitname"
+        cat ~/.config/tabbed/config.h > config.h
 	make
 }
 

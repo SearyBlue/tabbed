@@ -40,14 +40,16 @@ static Bool npisrelative  = False;
         } \
 }
 
-#define MODKEY Mod1Mask
+#define MODKEY ControlMask
 static Key keys[] = {
 	/* modifier             key        function     argument */
-	{ MODKEY,     XK_l,    rotate,      { .i = +1 } },
-	{ MODKEY,     XK_Right,    rotate,      { .i = +1 } },
-	{ MODKEY,     XK_h,    rotate,      { .i = -1 } },
-	{ MODKEY,     XK_Left,    rotate,      { .i = -1 } },
-	{ MODKEY,     XK_d,      spawn,       SETPROP("_TABBED_SELECT_TAB") },
+	{ NULL,       XK_m,    rotate,      { .i = +1 } },
+	{ ShiftMask,  XK_m,    rotate,      { .i = -1 } },
+	/* { MODKEY,     XK_l,    rotate,      { .i = +1 } }, */
+	/* { MODKEY,     XK_Right,    rotate,      { .i = +1 } }, */
+	/* { MODKEY,     XK_h,    rotate,      { .i = -1 } }, */
+	/* { MODKEY,     XK_Left,    rotate,      { .i = -1 } }, */
+	{ MODKEY,       XK_p,      spawn,       SETPROP("_TABBED_SELECT_TAB") },
 	{ MODKEY,     XK_o,      spawn,       SETPROPNEW() },
 	{ MODKEY,     XK_1,      move,        { .i = 0 } },
 	{ MODKEY,     XK_2,      move,        { .i = 1 } },
@@ -60,13 +62,4 @@ static Key keys[] = {
 	{ MODKEY,     XK_9,      move,        { .i = 8 } },
 	{ MODKEY,     XK_0,      move,        { .i = 9 } },
 	{ MODKEY,     XK_q,      killclient,  { 0 } },
-//
-        { 0,          XK_Alt_L, showbar,    { .i = 1 } },
-//	{ ShiftMask,            XK_Control_L, showbar,    { .i = 1 } },
-};
-
-static Key keyreleases[] = {
-	/* modifier             key          function     argument */
-        { 0,               XK_Alt_L,  showbar,     { .i = 0 } },
-	{ MODKEY,     XK_Alt_L,  showbar,     { .i = 0 } },
 };
