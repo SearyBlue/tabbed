@@ -1,22 +1,11 @@
 --- tabbed.c
 +++ tabbed.c
-@@ -317,18 +315,9 @@ void
+@@ -315,7 +315,7 @@ void
  drawbar(void)
  {
  	XftColor *col;
--	int c, cc, fc, width, nbh;
-+	int c, cc, fc, width;
+-	int c, cc, fc, width;
++	int c, cc, fc, width, nbh, i;
  	char *name = NULL;
  
--	nbh = barvisibility ? vbh : 0;
--	if (nbh != bh) {
--		bh = nbh;
--		for (c = 0; c < nclients; c++)
--			XMoveResizeWindow(dpy, clients[c]->win, 0, bh, ww, wh-bh);
--	}
--
--	if (bh == 0) return;
--
  	if (nclients == 0) {
- 		dc.x = 0;
- 		dc.w = ww;
