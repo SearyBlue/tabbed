@@ -102,9 +102,6 @@ static void *erealloc(void *o, size_t size);
 static void expose(const XEvent *e);
 static void focus(int c);
 static void focusin(const XEvent *e);
-static void focusonce(const Arg *arg);
-static void focusurgent(const Arg *arg);
-static void fullscreen(const Arg *arg);
 static char *getatom(int a);
 static int getclient(Window w);
 static XftColor getcolor(const char *colstr);
@@ -127,9 +124,7 @@ static void setcmd(int argc, char *argv[], int);
 static void setup(void);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
-static void spawn_2(const Arg *arg);
 static int textnw(const char *text, unsigned int len);
-static void toggle(const Arg *arg);
 static void unmanage(int c);
 static void unmapnotify(const XEvent *e);
 static void updatenumlockmask(void);
@@ -170,6 +165,7 @@ static char winid[64];
 static char **cmd;
 static char *wmname = "tabbed";
 static const char *geometry;
+static Bool barvisibility = False;
 
 char *argv0;
 
@@ -316,29 +312,28 @@ void
 drawbar(void)
 {
 	XftColor *col;
-	int c, cc, fc, width, nbh, i;
- 	char *name = NULL;
-	char tabtitle[256];
+	int c, cc, fc, width, nbh;
+	nbh = barvisibility ? vbh : 0;
+	if (nbh != bh) {
+		bh = nbh;
+		for (c = 0; c < nclients; c++)
+			XMoveResizeWindow(dpy, clients[c]->win, 0, bh, ww, wh-bh);
+	}
+
+	if (bh == 0) return;
+
+        char *name = NULL;
 
 	if (nclients == 0) {
 		dc.x = 0;
 		dc.w = ww;
 		XFetchName(dpy, win, &name);
 		drawtext(name ? name : "", dc.norm);
-		XCopyArea(dpy, dc.drawable, win, dc.gc, 0, 0, ww, vbh, 0, 0);
+		XCopyArea(dpy, dc.drawable, win, dc.gc, 0, 0, ww, bh, 0, 0);
 		XSync(dpy, False);
 
 		return;
 	}
-
-	nbh = nclients > 1 ? vbh : 0;
-	if (bh != nbh) {
-		bh = nbh;
-		for (i = 0; i < nclients; i++)
-			XMoveResizeWindow(dpy, clients[i]->win, 0, bh, ww, wh - bh);
-	}
-	if (bh == 0)
-		return;
 
 	width = ww;
 	cc = ww / tabwidth;
@@ -369,9 +364,7 @@ drawbar(void)
 		} else {
 			col = clients[c]->urgent ? dc.urg : dc.norm;
 		}
-		snprintf(tabtitle, sizeof(tabtitle), "%d: %s",
-		         c + 1, clients[c]->name);
-		drawtext(tabtitle, col);
+		drawtext(clients[c]->name, col);
 		dc.x += dc.w;
 		clients[c]->tabx = dc.x;
 	}
@@ -502,43 +495,6 @@ focusin(const XEvent *e)
 		if (focused == win)
 			focus(sel);
 	}
-}
-
-void
-focusonce(const Arg *arg)
-{
-	nextfocus = True;
-}
-
-void
-focusurgent(const Arg *arg)
-{
-	int c;
-
-	if (sel < 0)
-		return;
-
-	for (c = (sel + 1) % nclients; c != sel; c = (c + 1) % nclients) {
-		if (clients[c]->urgent) {
-			focus(c);
-			return;
-		}
-	}
-}
-
-void
-fullscreen(const Arg *arg)
-{
-	XEvent e;
-
-	e.type = ClientMessage;
-	e.xclient.window = win;
-	e.xclient.message_type = wmatom[WMState];
-	e.xclient.format = 32;
-	e.xclient.data.l[0] = 2;
-	e.xclient.data.l[1] = wmatom[WMFullscreen];
-	e.xclient.data.l[2] = 0;
-	XSendEvent(dpy, root, False, SubstructureNotifyMask, &e);
 }
 
 char *
@@ -1112,32 +1068,12 @@ spawn(const Arg *arg)
 	}
 }
 
-void
-spawn_2(const Arg *arg)
-{
-	if (fork() == 0) {
-		if (dpy)
-			close(ConnectionNumber(dpy));
-		setsid();
-		execvp(((char **)arg->v)[0], (char **)arg->v);
-		fprintf(stderr, "dwm: execvp %s", ((char **)arg->v)[0]);
-		perror(" failed");
-		exit(EXIT_SUCCESS);
-	}
-}
-
 int
 textnw(const char *text, unsigned int len)
 {
 	XGlyphInfo ext;
 	XftTextExtentsUtf8(dpy, dc.font.xfont, (XftChar8 *) text, len, &ext);
 	return ext.xOff;
-}
-
-void
-toggle(const Arg *arg)
-{
-    *(Bool*) arg->v = !*(Bool*) arg->v;
 }
 
 void

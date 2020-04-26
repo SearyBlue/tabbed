@@ -40,10 +40,10 @@ static Bool npisrelative  = False;
         } \
 }
 
-#define MODKEY ControlMask
+#define MODKEY Mod1Mask
 static Key keys[] = {
 	/* modifier             key        function     argument */
-	{ NULL,       XK_m,    rotate,      { .i = +1 } },
+	{ 0,       XK_m,    rotate,      { .i = +1 } },
 	{ ShiftMask,  XK_m,    rotate,      { .i = -1 } },
 	{ MODKEY,       XK_p,      spawn,       SETPROP("_TABBED_SELECT_TAB") },
 	{ MODKEY,     XK_o,      spawn,       SETPROPNEW() },
