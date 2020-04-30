@@ -42,7 +42,7 @@ static Bool npisrelative  = False;
 
 #define SETPROPDET() { \
         .v = (char *[]){ "/bin/sh", "-c", \
-        "xprop -id \"$0\" WM_NAME | cut -d '\"' -f2 | xargs zathura --fork", \
+        "xprop -id \"$0\" WM_NAME | cut -d '\"' -f2 | zathura --fork", \
         winid, NULL \
         } \
 }
@@ -67,8 +67,11 @@ static Key keys[] = {
 	{ MODKEY,     XK_8,      move,        { .i = 7 } },
 	{ MODKEY,     XK_9,      move,        { .i = 8 } },
 	{ MODKEY,     XK_0,      move,        { .i = 9 } },
+	{ MODKEY,     XK_q,      killclient,  { 0 } },
 };
+
 static Key keyreleases[] = {
 	/* modifier             key          function     argument */
 	{ MODKEY,     XK_q,      killclient,  { 0 } },
+
 };
