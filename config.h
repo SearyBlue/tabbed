@@ -51,22 +51,22 @@ static Bool npisrelative  = False;
 #define MODKEY Mod1Mask
 static Key keys[] = {
 	/* modifier             key        function     argument */
-	{ 0,       XK_m,    rotate,      { .i = +1 } },
-	{ ShiftMask,  XK_m,    rotate,      { .i = -1 } },
-	{ MODKEY,       XK_p,      spawn,       SETPROP("_TABBED_SELECT_TAB") },
-	{ MODKEY,     XK_o,      spawn,       SETPROPNEW() },
-	{ MODKEY,     XK_d,      spawn,       SETPROPDET() },
-	{ MODKEY,     XK_d,      killclient,  { 0 } },
-        { MODKEY,     XK_1,      move,        { .i = 0 } },
-	{ MODKEY,     XK_2,      move,        { .i = 1 } },
-	{ MODKEY,     XK_3,      move,        { .i = 2 } },
-	{ MODKEY,     XK_4,      move,        { .i = 3 } },
-	{ MODKEY,     XK_5,      move,        { .i = 4 } },
-	{ MODKEY,     XK_6,      move,        { .i = 5 } },
-	{ MODKEY,     XK_7,      move,        { .i = 6 } },
-	{ MODKEY,     XK_8,      move,        { .i = 7 } },
-	{ MODKEY,     XK_9,      move,        { .i = 8 } },
-	{ MODKEY,     XK_0,      move,        { .i = 9 } },
+	{ MODKEY,       	XK_m,    rotate,      { .i = +1 } },
+	{ MODKEY|ShiftMask,  	XK_m,    rotate,      { .i = -1 } },
+	{ MODKEY,       	XK_p,      spawn,       SETPROP("_TABBED_SELECT_TAB") },
+	{ MODKEY,    		XK_o,      spawn,       SETPROPNEW() },
+	{ MODKEY,    		XK_d,      spawn,       SETPROPDET() },
+	{ MODKEY,    		XK_d,      killclient,  { 0 } },
+        { MODKEY,    		XK_1,      move,        { .i = 0 } },
+	{ MODKEY,    		XK_2,      move,        { .i = 1 } },
+	{ MODKEY,    		XK_3,      move,        { .i = 2 } },
+	{ MODKEY,    		XK_4,      move,        { .i = 3 } },
+	{ MODKEY,    		XK_5,      move,        { .i = 4 } },
+	{ MODKEY,    		XK_6,      move,        { .i = 5 } },
+	{ MODKEY,    		XK_7,      move,        { .i = 6 } },
+	{ MODKEY,    		XK_8,      move,        { .i = 7 } },
+	{ MODKEY,    		XK_9,      move,        { .i = 8 } },
+	{ MODKEY,    		XK_0,      move,        { .i = 9 } },
 };
 static Key keyreleases[] = {
 	/* modifier             key          function     argument */
