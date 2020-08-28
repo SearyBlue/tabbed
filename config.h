@@ -52,10 +52,9 @@ static Bool npisrelative  = False;
 static Key keys[] = {
 	/* modifier             key        function     argument */
 	{ MODKEY,       	XK_Right,    rotate,      { .i = +1 } },
-	{ MODKEY,  	XK_Left,    rotate,      { .i = -1 } },
+	{ MODKEY,  		XK_Left,    rotate,      { .i = -1 } },
 	{ MODKEY,       	XK_p,      spawn,       SETPROP("_TABBED_SELECT_TAB") },
 	{ MODKEY,    		XK_o,      spawn,       SETPROPNEW() },
-	{ MODKEY,    		XK_d,      killclient,  { 0 } },
         { MODKEY,    		XK_1,      move,        { .i = 0 } },
 	{ MODKEY,    		XK_2,      move,        { .i = 1 } },
 	{ MODKEY,    		XK_3,      move,        { .i = 2 } },
