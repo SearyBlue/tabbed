@@ -55,7 +55,6 @@ static Key keys[] = {
 	{ MODKEY,  	XK_Left,    rotate,      { .i = -1 } },
 	{ MODKEY,       	XK_p,      spawn,       SETPROP("_TABBED_SELECT_TAB") },
 	{ MODKEY,    		XK_o,      spawn,       SETPROPNEW() },
-	{ MODKEY,    		XK_d,      spawn,       SETPROPDET() },
 	{ MODKEY,    		XK_d,      killclient,  { 0 } },
         { MODKEY,    		XK_1,      move,        { .i = 0 } },
 	{ MODKEY,    		XK_2,      move,        { .i = 1 } },
