@@ -40,13 +40,6 @@ static Bool npisrelative  = False;
         } \
 }
 
-#define SETPROPDET() { \
-        .v = (char *[]){ "/bin/sh", "-c", \
-        "xprop -id \"$0\" WM_NAME | cut -d '\"' -f2 | xargs zathura --fork", \
-        winid, NULL \
-        } \
-}
-
 
 #define MODKEY Mod1Mask
 static Key keys[] = {
